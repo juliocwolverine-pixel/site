@@ -1,0 +1,495 @@
+import { useEffect, useState } from 'react'
+
+export default function ProfessionalWebsite() {
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 })
+
+  useEffect(() => {
+    const handleMouseMove = (event: MouseEvent) => {
+      setCursorPosition({
+        x: event.clientX,
+        y: event.clientY,
+      })
+    }
+
+    window.addEventListener('mousemove', handleMouseMove)
+
+    return () => {
+      window.removeEventListener('mousemove', handleMouseMove)
+    }
+  }, [])
+
+  const categories = [
+    {
+      name: 'Power Racks',
+      products: ['Rack Básico', 'Rack Competição', 'Rack Half Cage'],
+    },
+    {
+      name: 'Rigs Funcionais',
+      products: ['Rig Modular', 'Rig Parede', 'Rig Suspenso'],
+    },
+    {
+      name: 'Cross Training',
+      products: ['Pull Up Station', 'Wall Ball Target', 'Dip Station'],
+    },
+    {
+      name: 'Academias',
+      products: ['Suportes', 'Storage', 'Bancos Ajustáveis'],
+    },
+  ]
+
+  const featuredProducts = [
+    {
+      title: 'POWER RACK 50',
+      category: 'Power Rack',
+      image: '/images/rack-50.png',
+    },
+    {
+      title: 'RIG FUNCTIONAL 70',
+      category: 'Rig Funcional',
+      image: '/images/rig-70.png',
+    },
+    {
+      title: 'RACK PERFORMANCE',
+      category: 'Performance Rack',
+      image: '/images/rack-performance.png',
+    },
+  ]
+
+  const projects = [
+    {
+      title: 'RACKS DE PERFORMANCE',
+      image: '/images/rack-50.png',
+    },
+    {
+      title: 'RIGS FUNCIONAIS',
+      image: '/images/rig-70.png',
+    },
+    {
+      title: 'ACADEMIAS COMPLETAS',
+      image: '/images/academias.png',
+    },
+  ]
+
+  return (
+    <>
+      <style>{`
+        * {
+          cursor: none;
+        }
+
+        .custom-cursor {
+          width: 18px;
+          height: 18px;
+          border: 2px solid #ff6a00;
+          background: rgba(255, 106, 0, 0.15);
+          border-radius: 9999px;
+          position: fixed;
+          pointer-events: none;
+          transform: translate(-50%, -50%);
+          z-index: 9999;
+          backdrop-filter: blur(2px);
+          transition: transform 0.08s linear;
+        }
+      `}</style>
+
+      <div
+        className="custom-cursor"
+        style={{
+          left: `${cursorPosition.x}px`,
+          top: `${cursorPosition.y}px`,
+        }}
+      />
+
+      <div className="min-h-screen overflow-x-hidden bg-black text-white">
+        <header className="fixed left-0 top-0 z-50 w-full border-b border-white/10 bg-black/80 backdrop-blur-xl">
+          <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+            <h1 className="text-2xl font-black tracking-[0.25em]">3B</h1>
+
+            <nav className="hidden gap-10 text-xs font-medium uppercase tracking-widest text-gray-300 lg:flex">
+              <a href="#inicio" className="transition hover:text-orange-500">
+                Início
+              </a>
+              <a href="#projetos" className="transition hover:text-orange-500">
+                Projetos
+              </a>
+              <a href="#categorias" className="transition hover:text-orange-500">
+                Categorias
+              </a>
+              <a href="#servicos" className="transition hover:text-orange-500">
+                Serviços
+              </a>
+              <a href="#contato" className="transition hover:text-orange-500">
+                Contato
+              </a>
+            </nav>
+
+            <button className="border border-white px-6 py-3 text-sm uppercase tracking-widest transition duration-300 hover:border-orange-500 hover:bg-orange-500 hover:text-black">
+              Solicitar Orçamento
+            </button>
+          </div>
+        </header>
+
+        <section id="inicio" className="relative flex min-h-screen items-center">
+          <div className="absolute inset-0">
+            <img
+              src="/images/rig-70.png"
+              alt="3B Indústria Fitness Rack"
+              className="h-full w-full object-cover"
+            />
+
+            <div className="absolute inset-0 bg-black/70" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent" />
+          </div>
+
+          <div className="relative z-10 mx-auto w-full max-w-7xl px-6 pt-32">
+            <div className="max-w-4xl">
+              <p className="mb-6 text-sm uppercase tracking-[0.4em] text-orange-500">
+                3B Indústria Fitness • Equipamentos Profissionais
+              </p>
+
+              <h2 className="mb-8 text-5xl font-black uppercase leading-[0.9] md:text-8xl">
+                Equipamentos<br />profissionais<br />para academias.
+              </h2>
+
+              <p className="mb-10 max-w-2xl text-xl leading-relaxed text-gray-300">
+                A 3B Indústria Fitness desenvolve racks, rigs e equipamentos profissionais com fabricação metálica premium para academias, studios e centros de treinamento.
+              </p>
+
+              <div className="flex flex-wrap gap-5">
+                <button className="bg-orange-500 px-10 py-5 text-sm font-bold uppercase tracking-widest text-black transition hover:bg-orange-400">
+                  Solicitar orçamento
+                </button>
+
+                <button className="border border-white px-10 py-5 text-sm uppercase tracking-widest transition hover:border-orange-500 hover:bg-orange-500 hover:text-black">
+                  Ver projetos
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-white/10 bg-zinc-950">
+          <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-4">
+            {[
+              ['+1000', 'Equipamentos Produzidos'],
+              ['15+', 'Anos de Mercado'],
+              ['100%', 'Projetos Sob Medida'],
+              ['BR', 'Entrega Nacional'],
+            ].map(([value, label]) => (
+              <div key={label}>
+                <h3 className="mb-3 text-5xl font-black">{value}</h3>
+
+                <p className="text-sm uppercase tracking-widest text-gray-400">
+                  {label}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="projetos" className="bg-black py-32">
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="mb-20 flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
+              <div>
+                <p className="mb-5 text-sm uppercase tracking-[0.4em] text-orange-500">
+                  Projetos
+                </p>
+
+                <h3 className="text-5xl font-black uppercase leading-none md:text-7xl">
+                  Força e<br />performance.
+                </h3>
+              </div>
+
+              <p className="max-w-xl text-lg leading-relaxed text-gray-400">
+                Equipamentos desenvolvidos para alta performance, resistência extrema e design industrial premium para academias modernas.
+              </p>
+            </div>
+
+            <div className="mb-16 grid gap-8 lg:grid-cols-3">
+              {featuredProducts.map((product) => (
+                <div
+                  key={product.title}
+                  className="group relative overflow-hidden border border-white/10 bg-zinc-900"
+                >
+                  <div className="h-[520px] overflow-hidden bg-black">
+                    <img
+                      src={product.image}
+                      alt={product.title}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-105"
+                    />
+                  </div>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent" />
+
+                  <div className="absolute bottom-0 left-0 p-8">
+                    <p className="mb-2 text-xs uppercase tracking-widest text-orange-500">
+                      {product.category}
+                    </p>
+
+                    <h4 className="text-3xl font-black uppercase">
+                      {product.title}
+                    </h4>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="grid gap-8 lg:grid-cols-3">
+              {projects.map((project) => (
+                <div
+                  key={project.title}
+                  className="group relative overflow-hidden bg-zinc-900"
+                >
+                  <div className="h-[600px] overflow-hidden">
+                    <img
+                      src={project.image}
+                      alt={project.title}
+                      className="h-full w-full object-cover transition duration-700 group-hover:scale-110"
+                    />
+                  </div>
+
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent" />
+
+                  <div className="absolute bottom-0 left-0 p-10">
+                    <p className="mb-3 text-xs uppercase tracking-widest text-orange-400">
+                      3B Performance
+                    </p>
+
+                    <h4 className="text-3xl font-bold uppercase">
+                      {project.title}
+                    </h4>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="categorias"
+          className="border-y border-white/10 bg-zinc-950 py-32"
+        >
+          <div className="mx-auto max-w-7xl px-6">
+            <div className="mb-20 flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
+              <div>
+                <p className="mb-5 text-sm uppercase tracking-[0.4em] text-orange-500">
+                  Categorias
+                </p>
+
+                <h3 className="text-5xl font-black uppercase leading-none md:text-7xl">
+                  Categorias de<br />produtos.
+                </h3>
+              </div>
+
+              <p className="max-w-xl text-lg leading-relaxed text-gray-400">
+                Soluções profissionais para academias comerciais, studios e centros de treinamento funcional.
+              </p>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-4">
+              {categories.map((category) => (
+                <div
+                  key={category.name}
+                  className="group border border-white/10 bg-black p-8 transition duration-300 hover:border-orange-500 hover:bg-zinc-950"
+                >
+                  <div className="mb-8 flex items-center justify-between">
+                    <h4 className="text-2xl font-black uppercase leading-tight">
+                      {category.name}
+                    </h4>
+
+                    <span className="text-4xl font-thin text-orange-500 transition duration-300 group-hover:rotate-45">
+                      +
+                    </span>
+                  </div>
+
+                  <div className="space-y-4 border-t border-white/10 pt-6">
+                    {category.products.map((product) => (
+                      <div
+                        key={product}
+                        className="flex items-center justify-between border-b border-white/10 pb-3 text-sm uppercase tracking-widest text-gray-400 transition hover:text-orange-500"
+                      >
+                        <span>{product}</span>
+                        <span className="text-orange-500">→</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="servicos"
+          className="relative overflow-hidden border-y border-white/10 bg-black py-32"
+        >
+          <div className="absolute inset-0 opacity-20">
+            <div className="h-full w-full bg-[radial-gradient(circle_at_top,rgba(255,106,0,0.15),transparent_60%)]" />
+          </div>
+
+          <div className="relative z-10 mx-auto max-w-7xl px-6">
+            <div className="mb-24 flex flex-col gap-10 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <p className="mb-5 text-sm uppercase tracking-[0.4em] text-orange-500">
+                  Serviços
+                </p>
+
+                <h2 className="text-5xl font-black uppercase leading-none md:text-7xl">
+                  Estruturas
+                  <br />
+                  profissionais.
+                </h2>
+              </div>
+
+              <p className="max-w-2xl text-lg leading-relaxed text-gray-400">
+                A 3B Indústria Fitness fabrica racks, rigs e estruturas metálicas de alto desempenho para academias comerciais, studios e centros de treinamento.
+              </p>
+            </div>
+
+            <div className="grid gap-8 md:grid-cols-2 xl:grid-cols-3">
+              {[
+                {
+                  title: 'Power Racks',
+                  desc: 'Estruturas robustas para treinamento de força e performance.',
+                },
+                {
+                  title: 'Rigs Funcionais',
+                  desc: 'Projetos completos para boxes de cross training.',
+                },
+                {
+                  title: 'Academias',
+                  desc: 'Equipamentos profissionais para academias comerciais.',
+                },
+                {
+                  title: 'Projetos Sob Medida',
+                  desc: 'Desenvolvimento personalizado conforme espaço e necessidade.',
+                },
+                {
+                  title: 'Pintura Eletrostática',
+                  desc: 'Acabamento industrial premium com alta durabilidade.',
+                },
+                {
+                  title: 'Estruturas Metálicas',
+                  desc: 'Soluções metálicas reforçadas para alta resistência.',
+                },
+              ].map((service) => (
+                <div
+                  key={service.title}
+                  className="group border border-white/10 bg-zinc-950 p-10 transition duration-500 hover:-translate-y-2 hover:border-orange-500"
+                >
+                  <div className="mb-8 flex items-center justify-between">
+                    <span className="text-6xl font-thin text-orange-500 transition duration-500 group-hover:rotate-45">
+                      +
+                    </span>
+                  </div>
+
+                  <h3 className="mb-6 text-3xl font-black uppercase leading-tight">
+                    {service.title}
+                  </h3>
+
+                  <p className="leading-relaxed text-gray-400 transition duration-300 group-hover:text-gray-200">
+                    {service.desc}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section
+          id="contato"
+          className="relative overflow-hidden bg-zinc-950 py-32"
+        >
+          <div className="absolute inset-0 opacity-20">
+            <div className="h-full w-full bg-[radial-gradient(circle_at_center,rgba(255,106,0,0.2),transparent_65%)]" />
+          </div>
+
+          <div className="relative z-10 mx-auto grid max-w-7xl gap-20 px-6 lg:grid-cols-2">
+            <div>
+              <p className="mb-5 text-sm uppercase tracking-[0.4em] text-orange-500">
+                Contato
+              </p>
+
+              <h2 className="mb-10 text-5xl font-black uppercase leading-none md:text-7xl">
+                Solicite
+                <br />
+                seu projeto.
+              </h2>
+
+              <p className="mb-12 max-w-xl text-lg leading-relaxed text-gray-400">
+                Entre em contato com a 3B Indústria Fitness e desenvolva equipamentos profissionais sob medida para sua academia ou centro de treinamento.
+              </p>
+
+              <div className="space-y-8">
+                <div className="border-l-2 border-orange-500 pl-6">
+                  <p className="mb-2 text-xs uppercase tracking-[0.3em] text-orange-500">
+                    WhatsApp
+                  </p>
+                  <p className="text-2xl font-bold text-white">
+                    (47) 99999-9999
+                  </p>
+                </div>
+
+                <div className="border-l-2 border-orange-500 pl-6">
+                  <p className="mb-2 text-xs uppercase tracking-[0.3em] text-orange-500">
+                    E-mail
+                  </p>
+                  <p className="text-xl text-white">
+                    contato@3bindustriafitness.com.br
+                  </p>
+                </div>
+
+                <div className="border-l-2 border-orange-500 pl-6">
+                  <p className="mb-2 text-xs uppercase tracking-[0.3em] text-orange-500">
+                    Localização
+                  </p>
+                  <p className="text-xl text-white">
+                    Joinville • Santa Catarina • Brasil
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="border border-white/10 bg-black/70 p-10 backdrop-blur-sm">
+              <div className="mb-10">
+                <h3 className="text-3xl font-black uppercase">
+                  Solicitar orçamento
+                </h3>
+              </div>
+
+              <form className="space-y-6">
+                <input
+                  type="text"
+                  placeholder="Nome"
+                  className="w-full border border-white/10 bg-zinc-950 px-6 py-5 text-white outline-none transition focus:border-orange-500"
+                />
+
+                <input
+                  type="email"
+                  placeholder="E-mail"
+                  className="w-full border border-white/10 bg-zinc-950 px-6 py-5 text-white outline-none transition focus:border-orange-500"
+                />
+
+                <input
+                  type="text"
+                  placeholder="Telefone"
+                  className="w-full border border-white/10 bg-zinc-950 px-6 py-5 text-white outline-none transition focus:border-orange-500"
+                />
+
+                <textarea
+                  placeholder="Descreva seu projeto"
+                  rows={6}
+                  className="w-full resize-none border border-white/10 bg-zinc-950 px-6 py-5 text-white outline-none transition focus:border-orange-500"
+                />
+
+                <button className="w-full bg-orange-500 px-8 py-5 text-sm font-black uppercase tracking-[0.2em] text-black transition duration-300 hover:bg-orange-400">
+                  Enviar orçamento
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
+  )
+}
